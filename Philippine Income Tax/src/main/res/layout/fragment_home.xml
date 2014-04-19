@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Enter amount here"
+                    android:hint="Enter gross amount here"
                     android:inputType="numberDecimal"
                     android:padding="10dp" />
             </LinearLayout>
@@ -152,6 +152,13 @@
                 android:textColor="#4285f4"
                 android:textStyle="italic" />
 
+            <LinearLayout
+                android:id="@+id/taxableIncomeLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/addNonTaxableIncomeTextView"
                 android:layout_width="match_parent"
@@ -164,6 +171,13 @@
                 android:text="Add a non-taxable income"
                 android:textColor="#4285f4"
                 android:textStyle="italic" />
+
+            <LinearLayout
+                android:id="@+id/nonTaxableIncomeLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -171,7 +185,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#333333" >
+        android:background="#000" >
 
         <LinearLayout
             android:layout_width="match_parent"
