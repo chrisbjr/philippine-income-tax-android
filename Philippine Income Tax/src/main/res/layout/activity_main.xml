@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#eeeeee"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,14 +17,14 @@
             android:paddingBottom="100dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin" >
+            android:paddingTop="@dimen/activity_vertical_margin">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_container_white"
                 android:orientation="vertical"
-                android:padding="10dp" >
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="Enter amount here"
+                    android:hint="Enter gross amount here"
                     android:inputType="numberDecimal"
                     android:padding="10dp" />
             </LinearLayout>
@@ -66,7 +66,7 @@
                 android:background="@drawable/bg_container_white"
                 android:orientation="vertical"
                 android:padding="10dp"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -110,7 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/bg_container_white"
                 android:orientation="vertical"
-                android:padding="10dp" >
+                android:padding="10dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -120,23 +120,64 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textStyle="bold" />
 
-                <CheckBox
-                    android:id="@+id/sssCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SSS" />
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:stretchColumns="0"
+                    android:layout_height="wrap_content">
 
-                <CheckBox
-                    android:id="@+id/philhealthCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Philhealth" />
+                    <TableRow>
 
-                <CheckBox
-                    android:id="@+id/pagibigCheckBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pagibig" />
+                        <CheckBox
+                            android:id="@+id/sssCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SSS" />
+
+                        <TextView
+                            android:id="@+id/sssAmountTextView"
+                            android:text="P0.00"
+                            android:textStyle="bold"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <CheckBox
+                            android:id="@+id/philhealthCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Philhealth" />
+
+                        <TextView
+                            android:id="@+id/philhealthAmountTextView"
+                            android:text="P0.00"
+                            android:textStyle="bold"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
+
+                    <TableRow>
+
+                        <CheckBox
+                            android:id="@+id/pagibigCheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pagibig" />
+
+                        <TextView
+                            android:id="@+id/pagibigAmountTextView"
+                            android:text="P0.00"
+                            android:textStyle="bold"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </TableRow>
+
+                </TableLayout>
+
             </LinearLayout>
 
             <TextView
@@ -152,6 +193,13 @@
                 android:textColor="#4285f4"
                 android:textStyle="italic" />
 
+            <LinearLayout
+                android:id="@+id/taxableIncomeLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"></LinearLayout>
+
             <TextView
                 android:id="@+id/addNonTaxableIncomeTextView"
                 android:layout_width="match_parent"
@@ -164,6 +212,13 @@
                 android:text="Add a non-taxable income"
                 android:textColor="#4285f4"
                 android:textStyle="italic" />
+
+            <LinearLayout
+                android:id="@+id/nonTaxableIncomeLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
         </LinearLayout>
     </ScrollView>
 
@@ -171,29 +226,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="#333333" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentTop="true" >
-        </LinearLayout>
+        android:background="#191916">
 
         <TextView
-            android:id="@+id/saveTextView"
+            android:id="@+id/clearTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="18dp"
-            android:text="SAVE"
+            android:text="Clear"
             android:textColor="#fff" />
 
         <LinearLayout
             android:id="@+id/separatorLinearLayout"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/saveTextView"
-            android:layout_alignTop="@+id/saveTextView"
-            android:layout_toRightOf="@+id/saveTextView"
+            android:layout_alignBottom="@+id/clearTextView"
+            android:layout_alignTop="@+id/clearTextView"
+            android:layout_toRightOf="@+id/clearTextView"
             android:background="#dddddd"
             android:orientation="vertical" />
 
@@ -202,13 +251,13 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/separatorLinearLayout" >
+            android:layout_toRightOf="@+id/separatorLinearLayout">
 
             <LinearLayout
                 android:id="@+id/resultLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/netIncomeTextView"
@@ -227,15 +276,6 @@
                     android:textStyle="italic" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/resultLinearLayout"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:text="View full details"
-                android:textColor="#4285f4"
-                android:textStyle="italic" />
         </RelativeLayout>
     </RelativeLayout>
 

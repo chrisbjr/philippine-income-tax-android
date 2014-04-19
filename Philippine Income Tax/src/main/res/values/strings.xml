@@ -4,5 +4,6 @@
     <string name="app_name">Philippine Income Tax</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_calculator">Calculator</string>
 
 </resources>
