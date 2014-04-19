@@ -3,11 +3,15 @@ package com.chrisbjr.android.philippineincometax;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,8 +20,12 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.chrisbjr.android.philippineincometax.adapters.IncomeAdapter;
 import com.chrisbjr.android.philippineincometax.models.IncomeTaxCalculationModel;
 import com.chrisbjr.android.philippineincometax.models.NonTaxableIncomeModel;
@@ -27,6 +35,9 @@ import com.chrisbjr.android.philippineincometax.objects.NonTaxableIncome;
 import com.chrisbjr.android.philippineincometax.objects.TaxableIncome;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends SherlockActivity {
 
@@ -47,11 +58,33 @@ public class MainActivity extends SherlockActivity {
     private NonTaxableIncomeModel mNonTaxableIncomeModel;
     private LinearLayout mTaxableIncomeLinearLayout;
     private LinearLayout mNonTaxableIncomeLinearLayout;
+    private ArrayList<HashMap<String, Object>> mCalculatorActivityItems;
+    private PackageManager mPackageManager;
+    private TextView mSssAmountTextView;
+    private TextView mPhilhealthAmountTextView;
+    private TextView mPagibigAmountTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_home);
+
+        // Hide keyboard
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+        setContentView(R.layout.activity_main);
+
+        // Let's look for a caclulator application
+        mCalculatorActivityItems = new ArrayList<HashMap<String, Object>>();
+        mPackageManager = getPackageManager();
+        List<PackageInfo> packs = mPackageManager.getInstalledPackages(0);
+        for (PackageInfo pi : packs) {
+            if (pi.packageName.toLowerCase().contains("calcul")) {
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("appName", pi.applicationInfo.loadLabel(mPackageManager));
+                map.put("packageName", pi.packageName);
+                mCalculatorActivityItems.add(map);
+            }
+        }
 
         mContext = this;
 
@@ -90,6 +123,11 @@ public class MainActivity extends SherlockActivity {
                 compute();
             }
         });
+
+        // Now we get the textview amounts
+        mSssAmountTextView = (TextView) findViewById(R.id.sssAmountTextView);
+        mPhilhealthAmountTextView = (TextView) findViewById(R.id.philhealthAmountTextView);
+        mPagibigAmountTextView = (TextView) findViewById(R.id.pagibigAmountTextView);
 
         mSalaryEditText = (EditText) findViewById(R.id.salaryEditText);
         if (mIncomeTaxCalculation.getSalaryRate() > 0) {
@@ -327,6 +365,16 @@ public class MainActivity extends SherlockActivity {
             }
         });
 
+        TextView clearTextView = (TextView) findViewById(R.id.clearTextView);
+        clearTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, MainActivity.class);
+                MainActivity.this.startActivity(i);
+                MainActivity.this.finish();
+            }
+        });
+
     }
 
     public void toggleMoreOptions() {
@@ -348,26 +396,46 @@ public class MainActivity extends SherlockActivity {
         double salary = 0;
         if (salaryStringValue.length() > 0) {
             salary = Double.parseDouble(mSalaryEditText.getText().toString());
-            if (salary >= 100000000) {
+            if (salary >= 10000000) {
                 mSalaryEditText.setError("Number is too large");
                 return;
             }
         }
-        mIncomeTaxCalculation.setSalaryRate(salary);
-        mIncomeTaxCalculation.setSalaryFrequency(1);
-        mIncomeTaxCalculation
-                .setWithholdingTaxTypeId(mWithholdingTaxTypeSpinner
-                        .getSelectedItemPosition() + 1);
-        mIncomeTaxCalculation.setDependents(mDependentsSeekBar.getProgress());
 
         mIncomeTaxCalculation.setSssActive(mSssCheckBox.isChecked());
         mIncomeTaxCalculation.setPhilhealthActive(mPhilhealthCheckBox
                 .isChecked());
         mIncomeTaxCalculation.setPagibigActive(mPagibigCheckBox.isChecked());
 
+        mIncomeTaxCalculation.setSalaryFrequency(1);
+        mIncomeTaxCalculation
+                .setWithholdingTaxTypeId(mWithholdingTaxTypeSpinner
+                        .getSelectedItemPosition() + 1);
+        mIncomeTaxCalculation.setDependents(mDependentsSeekBar.getProgress());
+
+        mIncomeTaxCalculation.setSalaryRate(salary, mContext);
+
         double netIncome = mIncomeTaxCalculation.getNetIncome(mContext);
         mNetIncomeTextView.setText("P"
                 + customFormat("###,###,###,###.##", netIncome));
+
+        if (mIncomeTaxCalculation.getSss() != null) {
+            mSssAmountTextView.setText("P" + customFormat("###.##", mIncomeTaxCalculation.getSss().getEmployeeContribution()));
+        } else {
+            mSssAmountTextView.setText("P0.00");
+        }
+
+        if (mIncomeTaxCalculation.getPhilhealth() != null) {
+            mPhilhealthAmountTextView.setText("P" + customFormat("###.##", mIncomeTaxCalculation.getPhilhealth().getEmployeeContribution()));
+        } else {
+            mPhilhealthAmountTextView.setText("P0.00");
+        }
+
+        if (mIncomeTaxCalculation.getPagibig() != null) {
+            mPagibigAmountTextView.setText("P" + customFormat("###.##", mIncomeTaxCalculation.getPagibig().getEmployeeContribution()));
+        } else {
+            mPagibigAmountTextView.setText("P0.00");
+        }
 
         mIncomeTaxCalculationModel.update(mIncomeTaxCalculation);
     }
@@ -376,6 +444,32 @@ public class MainActivity extends SherlockActivity {
         DecimalFormat myFormatter = new DecimalFormat(pattern);
         return myFormatter.format(value);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getSupportMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_calculator:
+                if (mCalculatorActivityItems.size() >= 1) {
+                    String packageName = (String) mCalculatorActivityItems.get(0).get("packageName");
+                    Intent i = mPackageManager.getLaunchIntentForPackage(packageName);
+                    if (i != null)
+                        startActivityForResult(i, 1);
+                } else {
+                    Toast.makeText(mContext, "You do not have any caculator applications", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
