@@ -16,10 +16,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.chrisbjr.android.philippineincometax.CalculatorActivity"
-            android:label="@string/title_activity_calculator" >
-        </activity>
     </application>
 
 </manifest>
