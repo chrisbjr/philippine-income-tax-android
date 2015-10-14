@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox mPagibigCheckBox;
     private EditText mSalaryEditText;
     private TextView mNetIncomeTextView;
+    private TextView mWithholdingTaxTextView;
     private LinearLayout mMoreOptionsLinearLayout;
     private TextView mMoreOptionsTextView;
     private TextView mDependentsTextView;
@@ -85,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         setContentView(R.layout.activity_main);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        }
 
         // Let's look for a caclulator application
         mCalculatorActivityItems = new ArrayList<HashMap<String, Object>>();
@@ -155,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mNetIncomeTextView = (TextView) findViewById(R.id.netIncomeTextView);
+        mWithholdingTaxTextView = (TextView) findViewById(R.id.withholdingTaxTextView);
         mMoreOptionsLinearLayout = (LinearLayout) findViewById(R.id.moreOptionsLinearLayout);
 
         mMoreOptionsTextView = (TextView) findViewById(R.id.moreOptionsTextView);
@@ -380,16 +387,6 @@ public class MainActivity extends AppCompatActivity {
 
         mAdView = (AdView) findViewById(R.id.adView);
 
-//        TextView clearTextView = (TextView) findViewById(R.id.clearTextView);
-//        clearTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(MainActivity.this, MainActivity.class);
-//                MainActivity.this.startActivity(i);
-//                MainActivity.this.finish();
-//            }
-//        });
-
         initAds();
         initGA();
     }
@@ -435,6 +432,10 @@ public class MainActivity extends AppCompatActivity {
         double netIncome = mIncomeTaxCalculation.getNetIncome(mContext);
         mNetIncomeTextView.setText("P"
                 + customFormat("###,###,###,###.##", netIncome));
+
+        mWithholdingTaxTextView.setText("P"
+                + customFormat("###,###,###,###.##",
+                mIncomeTaxCalculation.getWithholdingTax(mContext).getWithholdingTaxAmount()));
 
         if (mIncomeTaxCalculation.getSss() != null) {
             mSssAmountTextView.setText("P" + customFormat("###.##", mIncomeTaxCalculation.getSss().getEmployeeContribution()));
@@ -484,6 +485,10 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(mContext, "You do not have any caculator applications", Toast.LENGTH_SHORT).show();
                 }
                 return true;
+            case R.id.action_reset:
+                Intent i = new Intent(MainActivity.this, MainActivity.class);
+                MainActivity.this.startActivity(i);
+                MainActivity.this.finish();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -530,7 +535,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /** Called when returning to the activity */
+    /**
+     * Called when returning to the activity
+     */
     @Override
     public void onResume() {
         super.onResume();
