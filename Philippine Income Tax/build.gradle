@@ -21,7 +21,7 @@ android {
 dependencies {
     compile 'com.android.support:gridlayout-v7:23.0.0'
     compile 'com.android.support:support-v4:23.0.0'
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
+    compile 'com.android.support:appcompat-v7:23.0.0'
     compile "com.j256.ormlite:ormlite-android:4.48"
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
