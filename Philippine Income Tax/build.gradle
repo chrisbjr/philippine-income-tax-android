@@ -1,26 +1,26 @@
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.0"
 
     defaultConfig {
-        minSdkVersion 9
-        targetSdkVersion 19
+        minSdkVersion 14
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    compile 'com.android.support:gridlayout-v7:19.0.1'
-    compile 'com.android.support:support-v4:19.0.1'
+    compile 'com.android.support:gridlayout-v7:23.0.0'
+    compile 'com.android.support:support-v4:23.0.0'
     compile 'com.actionbarsherlock:actionbarsherlock:4.4.0@aar'
     compile "com.j256.ormlite:ormlite-android:4.48"
     compile fileTree(dir: 'libs', include: ['*.jar'])

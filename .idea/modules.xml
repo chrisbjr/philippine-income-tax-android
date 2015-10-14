@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Philippine Income Tax/Philippine Income Tax.iml" filepath="$PROJECT_DIR$/Philippine Income Tax/Philippine Income Tax.iml" />
+      <module fileurl="file://$PROJECT_DIR$/philippine-income-tax-android.iml" filepath="$PROJECT_DIR$/philippine-income-tax-android.iml" />
+    </modules>
+  </component>
+</project>
