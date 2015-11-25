@@ -1,10 +1,10 @@
-<RelativeLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#eeeeee"
-                tools:context="ph.coreproc.android.philippineincometax.MainActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    tools:context="ph.coreproc.android.philippineincometax.MainActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                     android:gravity="center_vertical"
                     android:text="Monthly Salary"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/salaryEditText"
@@ -44,7 +44,7 @@
                     android:ems="10"
                     android:hint="Enter gross amount here"
                     android:inputType="numberDecimal"
-                    android:padding="10dp"/>
+                    android:padding="10dp" />
             </LinearLayout>
 
             <TextView
@@ -58,7 +58,7 @@
                 android:padding="10dp"
                 android:text="More Income Tax Options"
                 android:textColor="#4285f4"
-                android:textStyle="italic"/>
+                android:textStyle="italic" />
 
             <LinearLayout
                 android:id="@+id/moreOptionsLinearLayout"
@@ -76,13 +76,13 @@
                     android:layout_marginTop="10dp"
                     android:text="Civil status"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/withholdingTaxTypeSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:entries="@array/withholding_tax_types_array"/>
+                    android:entries="@array/withholding_tax_types_array" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -90,20 +90,20 @@
                     android:layout_marginTop="20dp"
                     android:text="Number of dependents"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <SeekBar
                     android:id="@+id/dependentsSeekBar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:progress="0"/>
+                    android:progress="0" />
 
                 <TextView
                     android:id="@+id/dependentsTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
@@ -120,7 +120,7 @@
                     android:gravity="center_vertical"
                     android:text="Government Benefits"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TableLayout
                     android:layout_width="match_parent"
@@ -133,7 +133,7 @@
                             android:id="@+id/sssCheckBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SSS"/>
+                            android:text="SSS" />
 
                         <TextView
                             android:id="@+id/sssAmountTextView"
@@ -141,7 +141,7 @@
                             android:layout_height="wrap_content"
                             android:text="P0.00"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </TableRow>
 
                     <TableRow>
@@ -150,7 +150,7 @@
                             android:id="@+id/philhealthCheckBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Philhealth"/>
+                            android:text="Philhealth" />
 
                         <TextView
                             android:id="@+id/philhealthAmountTextView"
@@ -158,7 +158,7 @@
                             android:layout_height="wrap_content"
                             android:text="P0.00"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </TableRow>
 
                     <TableRow>
@@ -167,7 +167,7 @@
                             android:id="@+id/pagibigCheckBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pagibig"/>
+                            android:text="Pagibig" />
 
                         <TextView
                             android:id="@+id/pagibigAmountTextView"
@@ -175,7 +175,7 @@
                             android:layout_height="wrap_content"
                             android:text="P0.00"
                             android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
                     </TableRow>
 
                 </TableLayout>
@@ -193,7 +193,7 @@
                 android:padding="10dp"
                 android:text="Add a taxable income"
                 android:textColor="#4285f4"
-                android:textStyle="italic"/>
+                android:textStyle="italic" />
 
             <LinearLayout
                 android:id="@+id/taxableIncomeLinearLayout"
@@ -213,14 +213,14 @@
                 android:padding="10dp"
                 android:text="Add a non-taxable income"
                 android:textColor="#4285f4"
-                android:textStyle="italic"/>
+                android:textStyle="italic" />
 
             <LinearLayout
                 android:id="@+id/nonTaxableIncomeLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
         </LinearLayout>
     </ScrollView>
 
@@ -236,6 +236,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -253,7 +254,7 @@
                     android:text="P 0.00"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#fff"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -263,7 +264,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Net Income"
                     android:textColor="#fff"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -282,7 +283,7 @@
                     android:text="P 0.00"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:textColor="#fff"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -292,7 +293,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Withholding Tax"
                     android:textColor="#fff"
-                    android:textStyle="italic"/>
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
@@ -302,6 +303,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#191916">
+
             <com.google.android.gms.ads.AdView
                 android:id="@+id/adView"
                 android:layout_width="match_parent"
@@ -310,8 +312,7 @@
                 android:background="#191916"
                 android:visibility="visible"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/bottom_banner_home">
-            </com.google.android.gms.ads.AdView>
+                ads:adUnitId="@string/bottom_banner_home"></com.google.android.gms.ads.AdView>
         </FrameLayout>
 
     </LinearLayout>
