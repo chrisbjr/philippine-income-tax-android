@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -152,11 +153,18 @@ public class MainActivity extends AppCompatActivity {
         if (mIncomeTaxCalculation.getSalaryRate() > 0) {
             mSalaryEditText.setText(mIncomeTaxCalculation.getSalaryRate() + "");
         }
-        mSalaryEditText.setOnKeyListener(new View.OnKeyListener() {
+        mSalaryEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onKey(View arg0, int arg1, KeyEvent arg2) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
                 compute();
-                return false;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
 
